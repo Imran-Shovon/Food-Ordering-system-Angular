@@ -1,0 +1,58 @@
+.filter-bar {
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+  mat-button-toggle-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    mat-button-toggle {
+      background-color: #FFFFFF;
+      color: #333333;
+      border: 1px solid #CCCCCC;
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background-color 0.2s ease;
+
+      &.mat-button-toggle-checked {
+        background-color: #FF6200;
+        color: #FFFFFF;
+        border-color: #FF6200;
+      }
+
+      &:hover:not(.mat-button-toggle-checked) {
+        background-color: #FFE0B2;
+      }
+    }
+  }
+
+  ng-container {
+    margin-top: 16px;
+
+    input {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #CCCCCC;
+      border-radius: 8px;
+      width: 100%;
+      max-width: 300px;
+
+      &:focus {
+        outline: none;
+        border-color: #FF6200;
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    mat-button-toggle-group {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+}

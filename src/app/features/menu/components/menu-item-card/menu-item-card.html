@@ -1,9 +1,9 @@
 <mat-card *ngIf="menuItem" class="menu-item-card">
-  <img mat-card-image [src]="menuItem?.imageUrl" [alt]="menuItem?.name" />
+  <img mat-card-image [src]="menuItem.imageUrl" [alt]="menuItem.name" [attr.aria-label]="'Image of ' + menuItem.name" />
   <mat-card-content>
-    <h3>{{ menuItem?.name }}</h3>
-    <p>{{ menuItem?.price  }}</p> // pipe will use later | currency
-    <p>{{ menuItem?.category }}</p>
+    <h3>{{ menuItem.name }}</h3>
+    <p>{{ menuItem.price | currency }}</p> 
+    <p>{{ menuItem.category }}</p>
   </mat-card-content>
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="onAddToCart()">Add to Cart</button>

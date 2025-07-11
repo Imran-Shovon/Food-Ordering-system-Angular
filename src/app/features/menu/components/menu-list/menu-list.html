@@ -1,1 +1,18 @@
-<p>menu-list works!</p>
+<div class="menu-container">
+  <h1>Menu</h1>
+  <app-filter-bar [categories]="['All', 'Pizza', 'Burger', 'Salad']" (filterChange)="onFilterChange($event)">
+    <ng-template #customFilter>
+      <input placeholder="Custom search..." />
+       </ng-template>
+  </app-filter-bar>
+  <input #filterInput placeholder="Search menu..." />
+  <button mat-raised-button (click)="focusFilter()">Focus Filter</button>
+  <div class="menu-grid">
+    <app-menu-item-card
+      *ngFor="let item of menuItems$ | async"
+      [menuItem]="item"
+      (addToCart)="handleAddToCart($event)">
+    </app-menu-item-card>
+  </div>
+  <div #modalContainer></div>
+</div>

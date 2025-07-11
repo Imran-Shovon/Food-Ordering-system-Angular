@@ -17,7 +17,14 @@ describe('MenuItemCard', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  // it('should create', () => {
+  //   expect(component).toBeTruthy();
+  // });
+  it('should emit addToCart event', () => {
+  const component = new MenuItemCard();
+  component.menuItem = { id: 1, name: 'Pizza', price: 12.99, category: 'Pizza', imageUrl: 'pizza.jpg' };
+  spyOn(component.addToCart, 'emit');
+  component.onAddToCart();
+  expect(component.addToCart.emit).toHaveBeenCalledWith(1);
+});
 });
