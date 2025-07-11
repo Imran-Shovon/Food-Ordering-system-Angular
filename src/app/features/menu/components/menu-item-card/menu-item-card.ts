@@ -11,11 +11,11 @@ import { CommonModule } from '@angular/common';
 })
 export class MenuItemCard {
   @Input() menuItem: MenuItem | null = null;
-  @Output() addToCart = new EventEmitter<number>();
+  @Output() addToCart = new EventEmitter<MenuItem>();
 
   onAddToCart(): void {
     if (this.menuItem) {
-      this.addToCart.emit(this.menuItem.id);
+      this.addToCart.emit(this.menuItem);
     }
   }
 

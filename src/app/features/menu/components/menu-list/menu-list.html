@@ -3,7 +3,7 @@
   <app-filter-bar [categories]="['All', 'Pizza', 'Burger', 'Salad']" (filterChange)="onFilterChange($event)">
     <ng-template #customFilter>
       <input placeholder="Custom search..." />
-       </ng-template>
+    </ng-template>
   </app-filter-bar>
   <input #filterInput placeholder="Search menu..." />
   <button mat-raised-button (click)="focusFilter()">Focus Filter</button>
@@ -11,7 +11,7 @@
     <app-menu-item-card
       *ngFor="let item of menuItems$ | async"
       [menuItem]="item"
-      (addToCart)="handleAddToCart($event)">
+      (addToCart)="handleAddToCart(item)">
     </app-menu-item-card>
   </div>
   <div #modalContainer></div>

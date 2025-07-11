@@ -63,4 +63,18 @@ For more information on using the Angular CLI, including detailed command refere
 
 # Command
 - ng add @angular/material
-- npm install @ngrx/store @ngrx/effects @ngrx/store-devtools
+- npm install @ngrx/store @ngrx/effects @ngrx/store-devtools --legacy-peer-deps
+- ng generate component features/menu/components/menu-item-card
+- ng generate component features/menu/components/menu-list
+- ng generate component shared/components/filter-bar
+- ng generate component shared/components/modal
+- ng generate module features/menu/menu
+- ng generate module data/models/menu-item.model.ts
+- ng generate module data/services/menu.service.ts
+
+
+
+
+
+
+

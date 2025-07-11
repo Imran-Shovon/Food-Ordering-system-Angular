@@ -1,12 +1,14 @@
+import { AsyncPipe, CommonModule, } from '@angular/common';
 import { Component, ComponentRef, ElementRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
+import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import * as CartActions from '../../../../cart.actions';
 import { MenuItem } from '../../../../data/models/menu-item/menu-item.model';
 import { MenuService } from '../../../../data/services/menu/menu.service';
-import { MenuItemCard } from '../menu-item-card/menu-item-card';
-import { Modal } from '../../../../shared/components/modal/modal';
 import { FilterBar } from '../../../../shared/components/filter-bar/filter-bar';
-import { AsyncPipe, CommonModule,  } from '@angular/common';
+import { Modal } from '../../../../shared/components/modal/modal';
+import { MenuItemCard } from '../menu-item-card/menu-item-card';
 
 @Component({
   selector: 'app-menu-list',
@@ -20,14 +22,22 @@ export class MenuList {
   @ViewChild('modalContainer', { read: ViewContainerRef }) modalContainer!: ViewContainerRef;
   modalRef!: ComponentRef<Modal>;
 
-  constructor(private menuService: MenuService) {}
+  constructor(
+    private menuService: MenuService,
+    private store: Store
+  ) {}
+    onFilterChange(category: string): void {
+    // this.selectedCategory = category;
+    // this.filterChange.emit(category);
+  }
 
   ngOnInit(): void {
     this.menuItems$ = this.menuService.getMenuItems();
   }
 
-  handleAddToCart(itemId: number): void {
-    this.showModal(`Item ${itemId} added to cart!`);
+  handleAddToCart(item: MenuItem): void {
+    this.store.dispatch(CartActions.addToCart({ menuItemId: item.id, name: item.name, price: item.price }));
+    this.showModal(`Added ${item.name} to cart!`);
   }
 
   focusFilter(): void {
@@ -37,9 +47,7 @@ export class MenuList {
   showModal(message: string): void {
     this.modalContainer.clear();
     this.modalRef = this.modalContainer.createComponent(Modal);
-    this.modalRef.instance.isOpen = true;
-    this.modalRef.setInput('isOpen', true); // Angular 20+ input binding
-    // Simulate content projection by setting inner HTML (for simplicity)
+    this.modalRef.setInput('isOpen', true);
     const modalContent = this.modalRef.location.nativeElement.querySelector('.modal-content');
     modalContent.innerHTML = `<p>${message}</p><button mat-raised-button (click)="closeModal()">Close</button>`;
   }
@@ -48,11 +56,4 @@ export class MenuList {
     this.modalRef.instance.isOpen = false;
     this.modalContainer.clear();
   }
-
-  onFilterChange(selectedCategory: string): void {
-  console.log('Selected category:', selectedCategory);
-  // You can filter menuItems$ based on this category here
-}
-
-
 }
